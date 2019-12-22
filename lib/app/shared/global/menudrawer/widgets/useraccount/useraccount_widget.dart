@@ -1,6 +1,5 @@
 import 'package:eco_app_mobx/app/shared/global/loginbutton/loginbutton_controller.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../app_module.dart';
 
 class UseraccountWidget extends StatefulWidget {

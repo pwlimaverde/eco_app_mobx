@@ -1,5 +1,5 @@
+import 'package:eco_app_mobx/app/modules/ops/ops_module.dart';
 import 'package:eco_app_mobx/app/shared/global/loginbutton/loginbutton_controller.dart';
-import 'package:eco_app_mobx/app/shared/global/menudrawer/widgets/dropdownbutton/dropdownbutton_widget.dart';
 import 'package:eco_app_mobx/app/shared/global/menudrawer/widgets/tilelist/tilelist_widget.dart';
 import 'package:eco_app_mobx/app/shared/global/menudrawer/widgets/useraccount/useraccount_widget.dart';
 import 'package:eco_app_mobx/app/shared/modules/login/login_module.dart';
@@ -8,7 +8,6 @@ import '../../../../../app_module.dart';
 
 class DrawerlistWidget extends StatelessWidget {
   final store = AppModule.to.bloc<LoginbuttonController>();
-//  var _currence = ["modulo", "item 1", "Item 2"];
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class DrawerlistWidget extends StatelessWidget {
           onTap: () {
             if(store.logado != "sem login"){
               Navigator.pop(context);
-              return print("teste on tap");
+              return _navOpsPage(context);
             }
             Navigator.pop(context);
             _navLoginPage(context);
@@ -77,6 +76,18 @@ class DrawerlistWidget extends StatelessWidget {
     return Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => LoginModule()),
+    );
+  }
+  _navOpsPage(BuildContext context, {bool replace = false}) {
+    if (replace) {
+      return Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => OpsModule()),
+      );
+    }
+    return Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => OpsModule()),
     );
   }
 }
