@@ -26,22 +26,69 @@ mixin _$OpsController on _OpsBase, Store {
     }, _$orientationAtom, name: '${_$orientationAtom.name}_set');
   }
 
-  final _$listGetAllResponseAtom = Atom(name: '_OpsBase.listGetAllResponse');
+  final _$listAllOpsAtom = Atom(name: '_OpsBase.listAllOps');
 
   @override
-  List get listGetAllResponse {
-    _$listGetAllResponseAtom.context
-        .enforceReadPolicy(_$listGetAllResponseAtom);
-    _$listGetAllResponseAtom.reportObserved();
-    return super.listGetAllResponse;
+  ObservableList<RegistModel> get listAllOps {
+    _$listAllOpsAtom.context.enforceReadPolicy(_$listAllOpsAtom);
+    _$listAllOpsAtom.reportObserved();
+    return super.listAllOps;
   }
 
   @override
-  set listGetAllResponse(List value) {
-    _$listGetAllResponseAtom.context.conditionallyRunInAction(() {
-      super.listGetAllResponse = value;
-      _$listGetAllResponseAtom.reportChanged();
-    }, _$listGetAllResponseAtom, name: '${_$listGetAllResponseAtom.name}_set');
+  set listAllOps(ObservableList<RegistModel> value) {
+    _$listAllOpsAtom.context.conditionallyRunInAction(() {
+      super.listAllOps = value;
+      _$listAllOpsAtom.reportChanged();
+    }, _$listAllOpsAtom, name: '${_$listAllOpsAtom.name}_set');
+  }
+
+  final _$listProdOpsAtom = Atom(name: '_OpsBase.listProdOps');
+
+  @override
+  ObservableList<RegistModel> get listProdOps {
+    _$listProdOpsAtom.context.enforceReadPolicy(_$listProdOpsAtom);
+    _$listProdOpsAtom.reportObserved();
+    return super.listProdOps;
+  }
+
+  @override
+  set listProdOps(ObservableList<RegistModel> value) {
+    _$listProdOpsAtom.context.conditionallyRunInAction(() {
+      super.listProdOps = value;
+      _$listProdOpsAtom.reportChanged();
+    }, _$listProdOpsAtom, name: '${_$listProdOpsAtom.name}_set');
+  }
+
+  final _$listEntOpsAtom = Atom(name: '_OpsBase.listEntOps');
+
+  @override
+  ObservableList<RegistModel> get listEntOps {
+    _$listEntOpsAtom.context.enforceReadPolicy(_$listEntOpsAtom);
+    _$listEntOpsAtom.reportObserved();
+    return super.listEntOps;
+  }
+
+  @override
+  set listEntOps(ObservableList<RegistModel> value) {
+    _$listEntOpsAtom.context.conditionallyRunInAction(() {
+      super.listEntOps = value;
+      _$listEntOpsAtom.reportChanged();
+    }, _$listEntOpsAtom, name: '${_$listEntOpsAtom.name}_set');
+  }
+
+  final _$upProdAsyncAction = AsyncAction('upProd');
+
+  @override
+  Future upProd(int id) {
+    return _$upProdAsyncAction.run(() => super.upProd(id));
+  }
+
+  final _$upEntAsyncAction = AsyncAction('upEnt');
+
+  @override
+  Future upEnt(int id) {
+    return _$upEntAsyncAction.run(() => super.upEnt(id));
   }
 
   final _$_OpsBaseActionController = ActionController(name: '_OpsBase');
@@ -61,16 +108,6 @@ mixin _$OpsController on _OpsBase, Store {
     final _$actionInfo = _$_OpsBaseActionController.startAction();
     try {
       return super.getQuery(context, med);
-    } finally {
-      _$_OpsBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic listGetAll(List json) {
-    final _$actionInfo = _$_OpsBaseActionController.startAction();
-    try {
-      return super.listGetAll(json);
     } finally {
       _$_OpsBaseActionController.endAction(_$actionInfo);
     }

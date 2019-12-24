@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-class ListtilesiseWidget extends StatelessWidget {
+class ListtilesiseWidget extends StatefulWidget {
 
   var controller;
   var sizeGeral;
@@ -19,25 +19,30 @@ class ListtilesiseWidget extends StatelessWidget {
       this.title, this.subTile});
 
   @override
+  _ListtilesiseWidgetState createState() => _ListtilesiseWidgetState();
+}
+
+class _ListtilesiseWidgetState extends State<ListtilesiseWidget> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(0),
-      width: controller.getSize(sizeGeral, sizeCont),
+      width: widget.controller.getSize(widget.sizeGeral, widget.sizeCont),
       child: ListTile(
-        isThreeLine: threeLine ?? false,
+        isThreeLine: widget.threeLine ?? false,
         contentPadding: EdgeInsets.all(6),
         title: Text(
-          title,
+          widget.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              fontSize: controller.getSize(sizeGeral, sizeFontTile)*0.75, fontWeight: FontWeight.bold),
+              fontSize: widget.controller.getSize(widget.sizeGeral, widget.sizeFontTile)*0.75, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          subTile,
-          maxLines: line ?? 1,
+          widget.subTile,
+          maxLines: widget.line ?? 1,
           style: TextStyle(
-              fontSize: controller.getSize(sizeGeral, sizeFontSubTile)*0.75),
+              fontSize: widget.controller.getSize(widget.sizeGeral, widget.sizeFontSubTile)*0.75),
         ),
       ),
     );

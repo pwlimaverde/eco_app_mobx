@@ -1,3 +1,5 @@
-const BASE_URL = "http://api-ecoprint.herokuapp.com";
+const BASE_URL = "https://api-ecoprint.herokuapp.com";
 const OPS_URL = "/pcp-registro-op/";
 const REGIST_URL = "/pcp-registro-entrega/";
+const UPPROD_URL = "/upprod/";
+const UPENT_URL = "/upent/";

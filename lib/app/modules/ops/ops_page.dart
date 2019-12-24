@@ -1,5 +1,9 @@
+import 'package:eco_app_mobx/app/shared/global/loginbutton/loginbutton_controller.dart';
 import 'package:flutter/material.dart';
-
+import '../../app_module.dart';
+import 'ops_controller.dart';
+import 'ops_module.dart';
+import 'ops_repository.dart';
 import 'widgets/listops/listops_widget.dart';
 
 class OpsPage extends StatefulWidget {
@@ -11,6 +15,11 @@ class OpsPage extends StatefulWidget {
 }
 
 class _OpsPageState extends State<OpsPage> {
+
+  final controllerGeral = OpsModule.to.getBloc<OpsController>();
+  final controllerRepo = OpsModule.to.getDependency<OpsRepository>();
+  final store = AppModule.to.bloc<LoginbuttonController>();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -25,11 +34,13 @@ class _OpsPageState extends State<OpsPage> {
           ]),
         ),
         body: TabBarView(children: [
-          ListopsWidget(),
-          ListopsWidget(),
-          ListopsWidget(),
+          ListopsWidget(filtro: controllerRepo.getOps(), controllerGeral: controllerGeral, upProd: true,),
+          ListopsWidget(filtro: controllerRepo.getOps(), controllerGeral: controllerGeral,),
+          ListopsWidget(filtro: controllerRepo.getOps(), controllerGeral: controllerGeral,),
         ]),
       ),
     );
   }
 }
+
+
