@@ -52,7 +52,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
     widget.controllerGeral.getOrientation(context);
     if (MediaQuery.of(context).orientation == Orientation.landscape) {
       return Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(12),
         child: ListView.builder(
           itemCount: widget.filtro != null ? widget.filtro.length : 0,
           itemBuilder: (context, index) {
@@ -93,7 +93,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                       threeLine: true,
                       line: 3,
                       sizeGeral: size,
-                      sizeCont: 60,
+                      sizeCont: 58,
                       sizeFontTile: 2.2,
                       sizeFontSubTile: 1.5,
                       title:
@@ -137,10 +137,10 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                                 IconButton(
                                   icon: Icon(
                                     Icons.check,
-                                    size: 22,
+                                    size: 20,
                                     color: Colors.green,
                                   ),
-                                  padding: EdgeInsets.all(2),
+                                  padding: EdgeInsets.all(4),
                                   onPressed: () => upProd == true
                                       ? widget.controllerRepo.upProd(o.id)
                                       : widget.controllerRepo.upEnt(o.id),
@@ -151,7 +151,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                                     size: 20,
                                     color: Colors.red,
                                   ),
-                                  padding: EdgeInsets.all(2),
+                                  padding: EdgeInsets.all(4),
                                   onPressed: () => widget.controllerRepo.canProd(o.id),
                                 ),
                               ],
@@ -164,7 +164,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                                     size: 20,
                                     color: Colors.red,
                                   ),
-                                  padding: EdgeInsets.all(2),
+                                  padding: EdgeInsets.all(4),
                                   onPressed: () => widget.controllerRepo.canProd(o.id),
                                 ): IconButton(
                                   icon: Icon(
@@ -172,7 +172,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                                     size: 20,
                                     color: Colors.green,
                                   ),
-                                  padding: EdgeInsets.all(2),
+                                  padding: EdgeInsets.all(4),
                                   onPressed: () => widget.controllerRepo.atProd(o.id),
                                 )
                               ],
@@ -187,7 +187,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
       );
     }
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(12),
       child: ListView.builder(
         itemCount: widget.filtro != null ? widget.filtro.length : 0,
         itemBuilder: (context, index) {
@@ -210,7 +210,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                   ListtilesiseWidget(
                     controller: widget.controllerGeral,
                     sizeGeral: size,
-                    sizeCont: 15,
+                    sizeCont: 14,
                     sizeFontTile: 3.5,
                     sizeFontSubTile: 2.5,
                     title: "${o.op.op}",
@@ -227,7 +227,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                     threeLine: true,
                     line: 3,
                     sizeGeral: size,
-                    sizeCont: 42,
+                    sizeCont: 40,
                     sizeFontTile: 3.5,
                     sizeFontSubTile: 2.5,
                     title:
@@ -250,7 +250,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                     threeLine: true,
                     line: 3,
                     sizeGeral: size,
-                    sizeCont: 20,
+                    sizeCont: 18,
                     sizeFontTile: 3.5,
                     sizeFontSubTile: 2.5,
                     title: "Ent: ${formatDate(
