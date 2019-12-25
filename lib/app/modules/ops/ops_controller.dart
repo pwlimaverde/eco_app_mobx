@@ -23,7 +23,10 @@ abstract class _OpsBase with Store {
 
   @action
   upProd(int id) async {
+    RegistModel ent = listProdOps.singleWhere((item) => item.id == id);
+    print("${ent.op.op} - ${ent.id}");
     listProdOps.removeWhere((item) => item.id == id);
+    listEntOps.add(ent);
   }
 
   @action

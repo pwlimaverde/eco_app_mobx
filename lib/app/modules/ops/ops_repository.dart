@@ -9,10 +9,13 @@ import 'model/regist_model.dart';
 import 'ops_controller.dart';
 
 
+
 class OpsRepository extends Disposable {
 
   final controller = OpsModule.to.getBloc<OpsController>();
   final store = AppModule.to.bloc<LoginbuttonController>();
+
+
 
   Future getOps() async{
       var url = BASE_URL;
@@ -31,16 +34,14 @@ class OpsRepository extends Disposable {
       controller.listProdOps.clear();
       controller.listEntOps.clear();
       controller.listAllOps.addAll(ops);
-      for(RegistModel op in ops){
-          if(op.produzido == null){
-              print("BOX PROD --> ID: ${op.id} - OP: ${op.op.op} - OP: ${op.op.id}");
-              controller.listProdOps.add(op);
+      for(RegistModel prod in ops){
+          if(prod.produzido == null){
+              controller.listProdOps.add(prod);
           }
       }
-      for(RegistModel op in ops){
-          if(op.produzido != null){
-              print("BOX EXPED --> ID: ${op.id} - OP: ${op.op.op} - OP: ${op.op.id}");
-              controller.listEntOps.add(op);
+      for(RegistModel ent in ops){
+          if(ent.produzido != null && ent.entrega == null){
+              controller.listEntOps.add(ent);
           }
       }
   }

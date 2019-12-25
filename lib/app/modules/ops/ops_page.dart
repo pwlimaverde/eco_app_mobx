@@ -34,9 +34,9 @@ class _OpsPageState extends State<OpsPage> {
           ]),
         ),
         body: TabBarView(children: [
-          ListopsWidget(filtro: controllerRepo.getOps(), controllerGeral: controllerGeral, upProd: true,),
-          ListopsWidget(filtro: controllerRepo.getOps(), controllerGeral: controllerGeral,),
-          ListopsWidget(filtro: controllerRepo.getOps(), controllerGeral: controllerGeral,),
+          ListopsWidget(filtro: controllerGeral.listProdOps, controllerGeral: controllerGeral, controllerRepo: controllerRepo, upProd: true,),
+          ListopsWidget(filtro: controllerGeral.listEntOps, controllerGeral: controllerGeral, controllerRepo: controllerRepo,),
+          ListopsWidget(filtro: controllerGeral.listAllOps, controllerGeral: controllerGeral, controllerRepo: controllerRepo, allOps: true,),
         ]),
       ),
     );
