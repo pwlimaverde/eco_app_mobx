@@ -34,6 +34,16 @@ abstract class _OpsBase with Store {
     listEntOps.removeWhere((item) => item.id == id);
   }
 
+//  @action
+//  canProd(int id) async {
+//    RegistModel ent = listAllOps.singleWhere((item) => item.id == id);
+//    ent.op.cliente = ent.op.cliente + " - OP CANCELADA";
+//    print("${ent.op.cliente} - ${ent.id}");
+//    listProdOps.removeWhere((item) => item.id == id);
+//    listEntOps.removeWhere((item) => item.id == id);
+//    listAllOps.add(ent);
+//  }
+
   @action
   getOrientation(context) {
     orientation = MediaQuery.of(context).orientation;

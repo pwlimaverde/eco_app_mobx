@@ -97,7 +97,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                       sizeFontTile: 2.2,
                       sizeFontSubTile: 1.5,
                       title:
-                          "Cliente: ${o.op.cliente.length >= 35 ? o.op.cliente.substring(0, 35) : o.op.cliente}",
+                          "Cliente: ${o.cancelada == false ? o.op.cliente.length >= 35 ? o.op.cliente.substring(0, 35) : o.op.cliente : o.op.cliente.length >= 25 ? o.op.cliente.substring(0, 25) + " - OP CANCELADA" : o.op.cliente + " - OP CANCELADA"}",
                       subTile:
                           "${o.op.servico.length >= 150 ? o.op.servico.substring(0, 150) : o.op.servico}",
                     ),
@@ -140,7 +140,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                                     size: 22,
                                     color: Colors.green,
                                   ),
-                                  padding: EdgeInsets.all(0),
+                                  padding: EdgeInsets.all(2),
                                   onPressed: () => upProd == true
                                       ? widget.controllerRepo.upProd(o.id)
                                       : widget.controllerRepo.upEnt(o.id),
@@ -148,25 +148,33 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                                 IconButton(
                                   icon: Icon(
                                     Icons.clear,
-                                    size: 22,
+                                    size: 20,
                                     color: Colors.red,
                                   ),
-                                  padding: EdgeInsets.all(0),
-                                  onPressed: () => null,
+                                  padding: EdgeInsets.all(2),
+                                  onPressed: () => widget.controllerRepo.canProd(o.id),
                                 ),
                               ],
                             )
                           : Column(
                               children: <Widget>[
-                                IconButton(
+                                o.cancelada == false ? IconButton(
                                   icon: Icon(
                                     Icons.clear,
-                                    size: 22,
+                                    size: 20,
                                     color: Colors.red,
                                   ),
-                                  padding: EdgeInsets.all(0),
-                                  onPressed: () => null,
-                                ),
+                                  padding: EdgeInsets.all(2),
+                                  onPressed: () => widget.controllerRepo.canProd(o.id),
+                                ): IconButton(
+                                  icon: Icon(
+                                    Icons.settings_backup_restore,
+                                    size: 20,
+                                    color: Colors.green,
+                                  ),
+                                  padding: EdgeInsets.all(2),
+                                  onPressed: () => widget.controllerRepo.atProd(o.id),
+                                )
                               ],
                             ),
                     ),
@@ -223,7 +231,7 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                     sizeFontTile: 3.5,
                     sizeFontSubTile: 2.5,
                     title:
-                        "${o.op.cliente.length >= 35 ? o.op.cliente.substring(0, 35) : o.op.cliente}",
+                        "${o.cancelada == false ? o.op.cliente.length >= 35 ? o.op.cliente.substring(0, 35) : o.op.cliente : o.op.cliente.length >= 25 ? o.op.cliente.substring(0, 25) + " - OP CANCELADA" : o.op.cliente + " - OP CANCELADA"}",
                     subTile:
                         "${o.op.servico.length >= 150 ? o.op.servico.substring(0, 150) : o.op.servico}",
                   ),
@@ -263,10 +271,10 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                         IconButton(
                           icon: Icon(
                             Icons.check,
-                            size: 22,
+                            size: 20,
                             color: Colors.green,
                           ),
-                          padding: EdgeInsets.all(0),
+                          padding: EdgeInsets.all(2),
                           onPressed: () => upProd == true
                               ? widget.controllerRepo.upProd(o.id)
                               : widget.controllerRepo.upEnt(o.id),
@@ -274,25 +282,33 @@ class _ListopsWidgetState extends State<ListopsWidget> {
                         IconButton(
                           icon: Icon(
                             Icons.clear,
-                            size: 22,
+                            size: 20,
                             color: Colors.red,
                           ),
-                          padding: EdgeInsets.all(0),
-                          onPressed: () => null,
+                          padding: EdgeInsets.all(2),
+                          onPressed: () => widget.controllerRepo.canProd(o.id),
                         ),
                       ],
                     )
                         : Column(
                       children: <Widget>[
-                        IconButton(
+                        o.cancelada == false ? IconButton(
                           icon: Icon(
                             Icons.clear,
-                            size: 22,
+                            size: 20,
                             color: Colors.red,
                           ),
-                          padding: EdgeInsets.all(0),
-                          onPressed: () => null,
-                        ),
+                          padding: EdgeInsets.all(2),
+                          onPressed: () => widget.controllerRepo.canProd(o.id),
+                        ): IconButton(
+                          icon: Icon(
+                            Icons.settings_backup_restore,
+                            size: 20,
+                            color: Colors.green,
+                          ),
+                          padding: EdgeInsets.all(2),
+                          onPressed: () => widget.controllerRepo.atProd(o.id),
+                        )
                       ],
                     ),
                   ),

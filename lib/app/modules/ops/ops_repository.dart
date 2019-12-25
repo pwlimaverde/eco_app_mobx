@@ -35,12 +35,12 @@ class OpsRepository extends Disposable {
       controller.listEntOps.clear();
       controller.listAllOps.addAll(ops);
       for(RegistModel prod in ops){
-          if(prod.produzido == null){
+          if(prod.produzido == null && prod.cancelada == false){
               controller.listProdOps.add(prod);
           }
       }
       for(RegistModel ent in ops){
-          if(ent.produzido != null && ent.entrega == null){
+          if(ent.produzido != null && ent.entrega == null && ent.cancelada == false){
               controller.listEntOps.add(ent);
           }
       }
@@ -70,6 +70,32 @@ class OpsRepository extends Disposable {
 
       await http.patch(url+urlOps+"$id"+urlUpEnt, headers: header);
       await controller.upEnt(id);
+  }
+
+  Future canProd(int id) async{
+      var url = BASE_URL;
+      var urlOps = REGIST_URL;
+      var urlCanProd = CANPROD_URL;
+      var header = {
+          "Authorization": "Token ${await store.storage.read(key: "token")}",
+          "Content-type": "application/json",
+      };
+
+      await http.patch(url+urlOps+"$id"+urlCanProd, headers: header);
+      await getOps();
+  }
+
+  Future atProd(int id) async{
+      var url = BASE_URL;
+      var urlOps = REGIST_URL;
+      var urlAtProd = ATPROD_URL;
+      var header = {
+          "Authorization": "Token ${await store.storage.read(key: "token")}",
+          "Content-type": "application/json",
+      };
+
+      await http.patch(url+urlOps+"$id"+urlAtProd, headers: header);
+      await getOps();
   }
 
 
