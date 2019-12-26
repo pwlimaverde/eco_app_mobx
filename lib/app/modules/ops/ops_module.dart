@@ -1,3 +1,4 @@
+import 'package:eco_app_mobx/app/modules/ops/ops_service.dart';
 import 'package:eco_app_mobx/app/modules/ops/widgets/listtilesise/listtilesise_controller.dart';
 import 'package:eco_app_mobx/app/modules/ops/widgets/sizedboxw2/sizedboxw2_controller.dart';
 import 'package:eco_app_mobx/app/modules/ops/widgets/horizontaldivider/horizontaldivider_controller.dart';
@@ -25,6 +26,7 @@ class OpsModule extends ModuleWidget {
 
   @override
   List<Dependency> get dependencies => [
+        Dependency((i) => OpsService()),
 //        Dependency((i) => LocalopsStorageService()),
         Dependency((i) => OpsRepository()),
       ];

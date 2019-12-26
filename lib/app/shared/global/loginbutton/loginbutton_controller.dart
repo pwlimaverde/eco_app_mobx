@@ -12,7 +12,7 @@ abstract class _LoginbuttonBase with Store {
   @observable
   String logado = "sem login";
 
-  @observable
+  @action
   getData() async {
     String login = await storage.read(key: "username");
     return login;

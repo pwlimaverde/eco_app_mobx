@@ -33,10 +33,15 @@ class ListopsWidget extends StatefulWidget {
   _ListopsWidgetState createState() => _ListopsWidgetState();
 }
 
-class _ListopsWidgetState extends State<ListopsWidget> {
+class _ListopsWidgetState extends State<ListopsWidget> with AutomaticKeepAliveClientMixin<ListopsWidget>{
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return _observerOp();
   }
 

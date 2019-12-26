@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../app_module.dart';
+import '../../global/loginbutton/loginbutton_controller.dart';
 import 'login_controller.dart';
 import 'login_module.dart';
 import 'utilitario/estilos.dart';
@@ -21,6 +23,19 @@ class _LoginPageState extends State<LoginPage> {
 
   final controllerL = LoginModule.to.bloc<LoginController>();
   final controllerB = LoginModule.to.bloc<ButtonController>();
+  final store = AppModule.to.bloc<LoginbuttonController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future<String> user = store.storage.read(key: "username");
+    user.then((String user){
+      setState(() {
+        controllerL.crtlLogin.text = user;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -26,10 +26,11 @@ mixin _$LoginbuttonController on _LoginbuttonBase, Store {
     }, _$logadoAtom, name: '${_$logadoAtom.name}_set');
   }
 
+  final _$getDataAsyncAction = AsyncAction('getData');
+
   @override
-  ObservableFuture getData() {
-    final _$future = super.getData();
-    return ObservableFuture(_$future);
+  Future getData() {
+    return _$getDataAsyncAction.run(() => super.getData());
   }
 
   final _$logoutAsyncAction = AsyncAction('logout');

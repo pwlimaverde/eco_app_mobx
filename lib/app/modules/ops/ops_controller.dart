@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mobx/mobx.dart';
 import 'model/regist_model.dart';
 part 'ops_controller.g.dart';
@@ -6,6 +7,8 @@ part 'ops_controller.g.dart';
 class OpsController = _OpsBase with _$OpsController;
 
 abstract class _OpsBase with Store {
+
+  final storage = FlutterSecureStorage();
 
   @observable
   Orientation orientation;

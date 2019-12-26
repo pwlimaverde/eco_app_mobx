@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../../app_module.dart';
+import '../../global/loginbutton/loginbutton_controller.dart';
 part 'login_controller.g.dart';
 
 class LoginController = _LoginBase with _$LoginController;
 
 abstract class _LoginBase with Store {
+
+  final store = AppModule.to.bloc<LoginbuttonController>();
 
   final formKey = GlobalKey<FormState>();
   final crtlLogin = TextEditingController();
@@ -12,7 +17,6 @@ abstract class _LoginBase with Store {
   final focusSenha = FocusNode();
   final focusLogin = FocusNode();
   final focusConfirma = FocusNode();
-
 
 
   String validaLogin(String texto) {
