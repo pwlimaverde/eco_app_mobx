@@ -12,7 +12,7 @@ import 'widgets/field/field_widget.dart';
 class LoginPage extends StatefulWidget {
 
   final String title;
-  const LoginPage({Key key, this.title = "Home"}) : super(key: key);
+  const LoginPage({Key key, this.title = "Login"}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                   CircleAvatar(
                     radius: 60,
                     backgroundImage: NetworkImage(
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvJYS6EugVLAk-EpoVP7DUN-q3Ijla3BVJVyghFw6diayRfcsfoA&s"),
+                        "https://cdn3.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png"),
                   ),
                   SizedBox(
                     height: 30,

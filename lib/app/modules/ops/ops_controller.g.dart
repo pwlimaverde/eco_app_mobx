@@ -77,6 +77,23 @@ mixin _$OpsController on _OpsBase, Store {
     }, _$listEntOpsAtom, name: '${_$listEntOpsAtom.name}_set');
   }
 
+  final _$errorApiAtom = Atom(name: '_OpsBase.errorApi');
+
+  @override
+  bool get errorApi {
+    _$errorApiAtom.context.enforceReadPolicy(_$errorApiAtom);
+    _$errorApiAtom.reportObserved();
+    return super.errorApi;
+  }
+
+  @override
+  set errorApi(bool value) {
+    _$errorApiAtom.context.conditionallyRunInAction(() {
+      super.errorApi = value;
+      _$errorApiAtom.reportChanged();
+    }, _$errorApiAtom, name: '${_$errorApiAtom.name}_set');
+  }
+
   final _$upProdAsyncAction = AsyncAction('upProd');
 
   @override
@@ -92,6 +109,16 @@ mixin _$OpsController on _OpsBase, Store {
   }
 
   final _$_OpsBaseActionController = ActionController(name: '_OpsBase');
+
+  @override
+  dynamic getErrorApi(bool error) {
+    final _$actionInfo = _$_OpsBaseActionController.startAction();
+    try {
+      return super.getErrorApi(error);
+    } finally {
+      _$_OpsBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic getOrientation(dynamic context) {

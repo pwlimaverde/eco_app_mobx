@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mobx/mobx.dart';
+import 'package:rxdart/rxdart.dart';
 import 'model/regist_model.dart';
 part 'ops_controller.g.dart';
 
@@ -22,12 +23,18 @@ abstract class _OpsBase with Store {
   @observable
   ObservableList<RegistModel> listEntOps = ObservableList<RegistModel>();
 
+  @observable
+  bool errorApi;
 
+
+  @action
+  getErrorApi(bool error){
+    errorApi = error;
+  }
 
   @action
   upProd(int id) async {
     RegistModel ent = listProdOps.singleWhere((item) => item.id == id);
-    print("${ent.op.op} - ${ent.id}");
     listProdOps.removeWhere((item) => item.id == id);
     listEntOps.add(ent);
   }

@@ -1,14 +1,15 @@
 import 'package:date_format/date_format.dart';
+import 'package:eco_app_mobx/app/modules/ops/widgets/circularprogress/circularprogress_widget.dart';
+import 'package:eco_app_mobx/app/modules/ops/widgets/observerbutton/observerbutton_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../model/regist_model.dart';
 import '../../ops_module.dart';
-import '../../ops_repository.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../listtilesise/listtilesise_widget.dart';
+import 'listops_controller.dart';
 
 class ListopsWidget extends StatefulWidget {
-
   var filtro;
   final controllerGeral;
   final controllerRepo;
@@ -20,20 +21,15 @@ class ListopsWidget extends StatefulWidget {
       this.controllerGeral,
       this.controllerRepo,
       this.upProd,
-      this.allOps}) {
-    _init();
-  }
-
-  _init() {
-    final controllerRepo = OpsModule.to.getDependency<OpsRepository>();
-    controllerRepo.getOps();
-  }
+      this.allOps});
 
   @override
   _ListopsWidgetState createState() => _ListopsWidgetState();
 }
 
-class _ListopsWidgetState extends State<ListopsWidget> with AutomaticKeepAliveClientMixin<ListopsWidget>{
+class _ListopsWidgetState extends State<ListopsWidget>
+    with AutomaticKeepAliveClientMixin<ListopsWidget> {
+  final controller = OpsModule.to.getBloc<ListopsController>();
 
   @override
   // TODO: implement wantKeepAlive
@@ -65,15 +61,11 @@ class _ListopsWidgetState extends State<ListopsWidget> with AutomaticKeepAliveCl
             var size = widget.controllerGeral.getQuery(context, 100);
             bool upProd = widget.upProd ?? false;
             bool allOps = widget.allOps ?? false;
+            bool crt = false;
+            bool can = false;
             return Card(
               child: Container(
-                color: o.produzido != null && o.entrega != null
-                    ? Colors.grey[100]
-                    : o.status.posicao.toLowerCase().contains("atrasado")
-                        ? Colors.red[100]
-                        : o.status.posicao.toLowerCase().contains("hoje")
-                            ? Colors.yellow[100]
-                            : Colors.grey[100],
+                color: controller.getCorCard(o),
                 width: size,
                 child: Row(
                   children: <Widget>[
@@ -110,7 +102,7 @@ class _ListopsWidgetState extends State<ListopsWidget> with AutomaticKeepAliveCl
                       controller: widget.controllerGeral,
                       sizeGeral: size,
                       sizeCont: 10,
-                      sizeFontTile: 2.2,
+                      sizeFontTile: 2,
                       sizeFontSubTile: 1.5,
                       title: "QT: ${o.op.quant}",
                       subTile:
@@ -139,51 +131,51 @@ class _ListopsWidgetState extends State<ListopsWidget> with AutomaticKeepAliveCl
                       child: allOps == false
                           ? Column(
                               children: <Widget>[
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.check,
-                                    size: 20,
-                                    color: Colors.green,
-                                  ),
-                                  padding: EdgeInsets.all(4),
-                                  onPressed: () => upProd == true
-                                      ? widget.controllerRepo.upProd(o.id)
-                                      : widget.controllerRepo.upEnt(o.id),
+                                ObserverbuttonWidget(
+                                  upProd: upProd,
+                                  crt: crt,
+                                  id: o.id,
+                                  color: Colors.green,
+                                  icon: Icons.check,
+                                  controller: controller,
                                 ),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.clear,
-                                    size: 20,
-                                    color: Colors.red,
-                                  ),
-                                  padding: EdgeInsets.all(4),
-                                  onPressed: () => widget.controllerRepo.canProd(o.id),
+                                ObserverbuttonWidget(
+                                  upProd: upProd,
+                                  crt: can,
+                                  id: o.id,
+                                  color: Colors.red,
+                                  icon: Icons.clear,
+                                  controller: controller,
+                                  cancelarOP: true,
                                 ),
                               ],
                             )
                           : Column(
                               children: <Widget>[
-                                o.cancelada == false ? IconButton(
-                                  icon: Icon(
-                                    Icons.clear,
-                                    size: 20,
-                                    color: Colors.red,
-                                  ),
-                                  padding: EdgeInsets.all(4),
-                                  onPressed: () => widget.controllerRepo.canProd(o.id),
-                                ): IconButton(
-                                  icon: Icon(
-                                    Icons.settings_backup_restore,
-                                    size: 20,
-                                    color: Colors.green,
-                                  ),
-                                  padding: EdgeInsets.all(4),
-                                  onPressed: () => widget.controllerRepo.atProd(o.id),
-                                )
+                                o.cancelada == false
+                                    ? ObserverbuttonWidget(
+                                        crt: can,
+                                        id: o.id,
+                                        color: Colors.red,
+                                        icon: Icons.clear,
+                                        controller: controller,
+                                        cancelarOP: true,
+                                      )
+                                    : ObserverbuttonWidget(
+                                        crt: can,
+                                        id: o.id,
+                                        color: Colors.green,
+                                        icon: Icons.settings_backup_restore,
+                                        controller: controller,
+                                        cancelarOP: true,
+                                        reativarOP: true,
+                                      ),
                               ],
                             ),
                     ),
                   ],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                 ),
               ),
             );
@@ -200,15 +192,11 @@ class _ListopsWidgetState extends State<ListopsWidget> with AutomaticKeepAliveCl
           var size = widget.controllerGeral.getQuery(context, 100);
           bool upProd = widget.upProd ?? false;
           bool allOps = widget.allOps ?? false;
+          bool crt = false;
+          bool can = false;
           return Card(
             child: Container(
-              color: o.produzido != null && o.entrega != null
-                  ? Colors.grey[100]
-                  : o.status.posicao.toLowerCase().contains("atrasado")
-                  ? Colors.red[100]
-                  : o.status.posicao.toLowerCase().contains("hoje")
-                  ? Colors.yellow[100]
-                  : Colors.grey[100],
+              color: controller.getCorCard(o),
               width: size,
               child: Row(
                 children: <Widget>[
@@ -269,55 +257,55 @@ class _ListopsWidgetState extends State<ListopsWidget> with AutomaticKeepAliveCl
                         "${o.obs != null ? o.obs.length >= 68 ? o.obs.substring(0, 68) : o.obs : ""}",
                   ),
                   Container(
-                    width: widget.controllerGeral.getSize(size, 4),
+                    width: widget.controllerGeral.getSize(size, 3),
                     child: allOps == false
                         ? Column(
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            Icons.check,
-                            size: 20,
-                            color: Colors.green,
-                          ),
-                          padding: EdgeInsets.all(2),
-                          onPressed: () => upProd == true
-                              ? widget.controllerRepo.upProd(o.id)
-                              : widget.controllerRepo.upEnt(o.id),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.clear,
-                            size: 20,
-                            color: Colors.red,
-                          ),
-                          padding: EdgeInsets.all(2),
-                          onPressed: () => widget.controllerRepo.canProd(o.id),
-                        ),
-                      ],
-                    )
+                            children: <Widget>[
+                              ObserverbuttonWidget(
+                                upProd: upProd,
+                                crt: crt,
+                                id: o.id,
+                                color: Colors.green,
+                                icon: Icons.check,
+                                controller: controller,
+                              ),
+                              ObserverbuttonWidget(
+                                upProd: upProd,
+                                crt: can,
+                                id: o.id,
+                                color: Colors.red,
+                                icon: Icons.clear,
+                                controller: controller,
+                                cancelarOP: true,
+                              ),
+                            ],
+                          )
                         : Column(
-                      children: <Widget>[
-                        o.cancelada == false ? IconButton(
-                          icon: Icon(
-                            Icons.clear,
-                            size: 20,
-                            color: Colors.red,
+                            children: <Widget>[
+                              o.cancelada == false
+                                  ? ObserverbuttonWidget(
+                                      crt: can,
+                                      id: o.id,
+                                      color: Colors.red,
+                                      icon: Icons.clear,
+                                      controller: controller,
+                                      cancelarOP: true,
+                                    )
+                                  : ObserverbuttonWidget(
+                                      crt: can,
+                                      id: o.id,
+                                      color: Colors.green,
+                                      icon: Icons.settings_backup_restore,
+                                      controller: controller,
+                                      cancelarOP: true,
+                                      reativarOP: true,
+                                    ),
+                            ],
                           ),
-                          padding: EdgeInsets.all(2),
-                          onPressed: () => widget.controllerRepo.canProd(o.id),
-                        ): IconButton(
-                          icon: Icon(
-                            Icons.settings_backup_restore,
-                            size: 20,
-                            color: Colors.green,
-                          ),
-                          padding: EdgeInsets.all(2),
-                          onPressed: () => widget.controllerRepo.atProd(o.id),
-                        )
-                      ],
-                    ),
                   ),
                 ],
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
               ),
             ),
           );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-
 import '../../../app_module.dart';
 import '../../global/loginbutton/loginbutton_controller.dart';
 part 'login_controller.g.dart';
