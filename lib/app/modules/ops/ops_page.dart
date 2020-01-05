@@ -69,6 +69,9 @@ class _OpsPageState extends State<OpsPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+
+        ],
         title: Text(widget.title),
         bottom: TabBar(
           controller: _tabController,

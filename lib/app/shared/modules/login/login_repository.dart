@@ -30,7 +30,7 @@ class LoginRepository extends Disposable {
 
       var response = await http.post(url+urlToken, headers: header, body: _body);
       Map mapResponse = json.decode(response.body);
-      print(mapResponse);
+      print("ok -- $mapResponse - cod - ${response.statusCode}");
 
       if (response.statusCode == 200) {
         await store.storage.write(key: "token", value: mapResponse["token"]);

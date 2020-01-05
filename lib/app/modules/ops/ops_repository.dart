@@ -11,6 +11,7 @@ import 'model/regist_model.dart';
 import 'ops_controller.dart';
 
 class OpsRepository extends Disposable {
+
   final controller = OpsModule.to.getBloc<OpsController>();
   final store = AppModule.to.bloc<LoginbuttonController>();
 
@@ -172,5 +173,6 @@ class OpsRepository extends Disposable {
 
   //dispose will be called automatically
   @override
-  void dispose() {}
+  void dispose() {
+  }
 }

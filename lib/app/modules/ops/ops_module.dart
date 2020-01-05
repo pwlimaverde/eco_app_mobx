@@ -1,3 +1,4 @@
+import 'package:eco_app_mobx/app/modules/ops/widgets/uploadfile/uploadfile_controller.dart';
 import 'package:eco_app_mobx/app/modules/ops/ops_service.dart';
 import 'package:eco_app_mobx/app/modules/ops/widgets/listtilesise/listtilesise_controller.dart';
 import 'package:eco_app_mobx/app/modules/ops/widgets/sizedboxw2/sizedboxw2_controller.dart';
@@ -15,6 +16,7 @@ import 'widgets/listops/listops_controller.dart';
 class OpsModule extends ModuleWidget {
   @override
   List<Bloc> get blocs => [
+        Bloc((i) => UploadfileController()),
         Bloc((i) => ListtilesiseController()),
         Bloc((i) => Sizedboxw2Controller()),
         Bloc((i) => HorizontaldividerController()),
